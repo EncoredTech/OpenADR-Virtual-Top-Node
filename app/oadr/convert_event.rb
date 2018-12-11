@@ -240,7 +240,7 @@ private
     oadr_event.ei_event.event_descriptor.ei_market_context = Oadr2bFactory.create_market_context(event.market_context.name)
 
     # created_date_time is the last time the message was generated, not the first time the event was created
-    oadr_event.ei_event.event_descriptor.created_date_time = ZuluTime.get_gregorian_calendar_ruby_dt(event.updated_at)
+    oadr_event.ei_event.event_descriptor.created_date_time = ZuluTime.get_gregorian_calendar_ruby_dt(event.created_at)
     oadr_event.ei_event.event_descriptor.event_status = ConvertStringToEnum.instance.convert_event_status(event.event_status.nil? ? "" : event.event_status.name)
     oadr_event.ei_event.event_descriptor.test_event = event.test_event
     oadr_event.ei_event.event_descriptor.vtn_comment = event.vtn_comment

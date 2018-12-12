@@ -204,7 +204,7 @@ class HttpAgentB < HttpAgent
 
     OadrLogger.instance.log_info("push message to #{@ven.transport_address}")
 
-    response = @http_client.post(@ven.registration.oadr_transport_address + "/OpenADR2/Simple/2.0b/#{ven_message.service_type.name}", ven_message.oadr_message)
+    response = @http_client.post(@ven.transport_address + "/OpenADR2/Simple/2.0b/#{ven_message.service_type.name}", ven_message.oadr_message)
 
     response
   end

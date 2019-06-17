@@ -207,21 +207,17 @@ class PushMessageManager
 
     OadrLogger.instance.log_info("starting agent for ven: #{ven.id}")
 
-    if ven.http_push?
-      OadrLogger.instance.log_info("starting http A agent for ven: #{ven.id}")
-
-      agant = agent = HttpAgentA.new(ven.id, @options)
-
-    elsif ven.registration.oadr_transport_name == 'simpleHttp'
-      OadrLogger.instance.log_info("starting http B agent for ven: #{ven.id}")
-
-      # is it an HTTP or XMPP agent? profile a or b
-      agent = HttpAgentB.new(ven.id, @options)
+    if ven.registration.oadr_transport_name == 'simpleHttp'
+      if ven.profile.name == "2.0a"
+        OadrLogger.instance.log_info("starting http A agent for ven: #{ven.id}")
+        agent = HttpAgentA.new(ven.id, @options)
+      else
+        OadrLogger.instance.log_info("starting http B agent for ven: #{ven.id}")
+        agent = HttpAgentB.new(ven.id, @options)
+      end
     else
       OadrLogger.instance.log_info("starting xmpp agent for ven: #{ven.id}")
-
       agent = XmppAgent.new(ven.id, @xmpp_service_handler)
-
     end
 
     agent.start
